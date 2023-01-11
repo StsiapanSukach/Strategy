@@ -1,7 +1,7 @@
 {
-  "name": "jira_api",
+  "name": "strategy",
   "version": "1.0.0",
-  "author": "Ivor Reic",
+  "author": "Stsiapan Sukach",
   "license": "MIT",
   "scripts": {
     "start": "nodemon --exec ts-node --files src/index.ts",
