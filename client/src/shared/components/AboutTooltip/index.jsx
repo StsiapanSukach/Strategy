@@ -23,8 +23,8 @@ const AboutTooltip = tooltipProps => (
 
         <FeedbackParagraph>
           {'Read more on my website or reach out via '}
-          <a href="mailto:ivor@codetree.co">
-            <strong>ivor@codetree.co</strong>
+          <a href="mailto:stepansukac@gmail.com">
+            <strong>stepansukac@gmail.com</strong>
           </a>
         </FeedbackParagraph>
 
@@ -32,7 +32,11 @@ const AboutTooltip = tooltipProps => (
           <Button variant="primary">Visit Website</Button>
         </a>
 
-        <a href="https://github.com/oldboyxx/jira_clone" target="_blank" rel="noreferrer noopener">
+        <a
+          href="https://github.com/StsiapanSukach/Strategy"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           <Button style={{ marginLeft: 10 }} icon="github">
             Github Repo
           </Button>
