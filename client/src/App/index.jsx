@@ -10,8 +10,8 @@ import accessDenied from './assets/access_denied.png';
 import './fontStyles.css';
 
 const App = () => {
-  const account = prompt('Login : ', '');
-  const password = prompt('Password : ', '');
+  const account = prompt('Имя : ', '');
+  const password = prompt('Пароль : ', '');
 
   if (account !== 'user' || password !== '1234') {
     return (
