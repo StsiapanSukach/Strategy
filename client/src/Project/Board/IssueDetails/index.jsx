@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import api from 'shared/utils/api';
 import useApi from 'shared/hooks/api';
@@ -34,6 +35,7 @@ const ProjectBoardIssueDetails = ({
   modalClose,
 }) => {
   const [{ data, error, setLocalData }, fetchIssue] = useApi.get(`/issues/${issueId}`);
+  const { t } = useTranslation();
 
   if (!data) return <Loader />;
   if (error) return <PageError />;
@@ -62,7 +64,7 @@ const ProjectBoardIssueDetails = ({
           <AboutTooltip
             renderLink={linkProps => (
               <Button icon="feedback" variant="empty" {...linkProps}>
-                Give feedback
+                {t('description.give_feedback')}
               </Button>
             )}
           />

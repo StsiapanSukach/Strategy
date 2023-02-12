@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { Avatar, Select, Icon } from 'shared/components';
 
@@ -13,18 +14,19 @@ const propTypes = {
 };
 
 const ProjectBoardIssueDetailsAssigneesReporter = ({ issue, updateIssue, projectUsers }) => {
-  const getUserById = userId => projectUsers.find(user => user.id === userId);
+  const { t } = useTranslation();
 
+  const getUserById = userId => projectUsers.find(user => user.id === userId);
   const userOptions = projectUsers.map(user => ({ value: user.id, label: user.name }));
 
   return (
     <Fragment>
-      <SectionTitle>Assignees</SectionTitle>
+      <SectionTitle>{t('description.assignes')}</SectionTitle>
       <Select
         isMulti
         variant="empty"
         dropdownWidth={343}
-        placeholder="Unassigned"
+        placeholder={t('description.unassigned')}
         name="assignees"
         value={issue.userIds}
         options={userOptions}
@@ -37,7 +39,7 @@ const ProjectBoardIssueDetailsAssigneesReporter = ({ issue, updateIssue, project
         renderOption={({ value: userId }) => renderUser(getUserById(userId), false)}
       />
 
-      <SectionTitle>Reporter</SectionTitle>
+      <SectionTitle>{t('description.reporter')}</SectionTitle>
       <Select
         variant="empty"
         dropdownWidth={343}

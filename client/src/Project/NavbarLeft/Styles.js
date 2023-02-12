@@ -9,7 +9,7 @@ export const NavLeft = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
-  overflow-x: hidden;
+  overflow: hidden;
   height: 100vh;
   width: ${sizes.appNavBarLeftWidth}px;
   background: ${color.backgroundDarkPrimary};

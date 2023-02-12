@@ -1,3 +1,5 @@
+import i18n from '../../i18n';
+
 export const IssueType = {
   TASK: 'task',
   BUG: 'bug',
@@ -20,22 +22,22 @@ export const IssuePriority = {
 };
 
 export const IssueTypeCopy = {
-  [IssueType.TASK]: 'Task',
-  [IssueType.BUG]: 'Bug',
-  [IssueType.STORY]: 'Story',
+  [IssueType.TASK]: i18n.t('entities.task'),
+  [IssueType.BUG]: i18n.t('entities.bug'),
+  [IssueType.STORY]: i18n.t('entities.story'),
 };
 
 export const IssueStatusCopy = {
-  [IssueStatus.BACKLOG]: 'Backlog',
-  [IssueStatus.SELECTED]: 'Selected for development',
-  [IssueStatus.INPROGRESS]: 'In progress',
-  [IssueStatus.DONE]: 'Done',
+  [IssueStatus.BACKLOG]: i18n.t('entities.backlog'),
+  [IssueStatus.SELECTED]: i18n.t('entities.selected'),
+  [IssueStatus.INPROGRESS]: i18n.t('entities.in_progress'),
+  [IssueStatus.DONE]: i18n.t('entities.done'),
 };
 
 export const IssuePriorityCopy = {
-  [IssuePriority.HIGHEST]: 'Highest',
-  [IssuePriority.HIGH]: 'High',
-  [IssuePriority.MEDIUM]: 'Medium',
-  [IssuePriority.LOW]: 'Low',
-  [IssuePriority.LOWEST]: 'Lowest',
+  [IssuePriority.HIGHEST]: i18n.t('entities.highest'),
+  [IssuePriority.HIGH]: i18n.t('entities.high'),
+  [IssuePriority.MEDIUM]: i18n.t('entities.medium'),
+  [IssuePriority.LOW]: i18n.t('entities.low'),
+  [IssuePriority.LOWEST]: i18n.t('entities.lowest'),
 };

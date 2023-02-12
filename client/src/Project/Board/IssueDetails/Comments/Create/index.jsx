@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import api from 'shared/utils/api';
 import useCurrentUser from 'shared/hooks/currentUser';
@@ -15,6 +16,7 @@ const propTypes = {
 };
 
 const ProjectBoardIssueDetailsCommentsCreate = ({ issueId, fetchIssue }) => {
+  const { t } = useTranslation();
   const [isFormOpen, setFormOpen] = useState(false);
   const [isCreating, setCreating] = useState(false);
   const [body, setBody] = useState('');
@@ -48,7 +50,9 @@ const ProjectBoardIssueDetailsCommentsCreate = ({ issueId, fetchIssue }) => {
           />
         ) : (
           <Fragment>
-            <FakeTextarea onClick={() => setFormOpen(true)}>Add a comment...</FakeTextarea>
+            <FakeTextarea onClick={() => setFormOpen(true)}>
+              {t('description.add_comment')}
+            </FakeTextarea>
             <ProTip setFormOpen={setFormOpen} />
           </Fragment>
         )}

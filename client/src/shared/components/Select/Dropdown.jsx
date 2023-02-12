@@ -1,6 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { uniq } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import { KeyCodes } from 'shared/constants/keyCodes';
 
@@ -44,6 +45,7 @@ const SelectDropdown = ({
   withClearValue,
   propsRenderOption,
 }) => {
+  const { t } = useTranslation();
   const [isCreatingOption, setCreatingOption] = useState(false);
 
   const $optionsRef = useRef();
@@ -178,7 +180,7 @@ const SelectDropdown = ({
     <Dropdown width={dropdownWidth}>
       <DropdownInput
         type="text"
-        placeholder="Search"
+        placeholder={t('basic.search')}
         ref={$inputRef}
         autoFocus
         onKeyDown={handleInputKeyDown}

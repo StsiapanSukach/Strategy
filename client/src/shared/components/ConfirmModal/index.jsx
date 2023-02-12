@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import i18n from '../../../i18n';
 
 import { StyledConfirmModal, Title, Message, Actions, StyledButton } from './Styles';
 
@@ -17,10 +18,10 @@ const propTypes = {
 const defaultProps = {
   className: undefined,
   variant: 'primary',
-  title: 'Warning',
-  message: 'Are you sure you want to continue with this action?',
-  confirmText: 'Confirm',
-  cancelText: 'Cancel',
+  title: i18n.t('description.warning'),
+  message: i18n.t('description.action_confirmation'),
+  confirmText: i18n.t('description.confirm'),
+  cancelText: i18n.t('description.cancel'),
 };
 
 const ConfirmModal = ({

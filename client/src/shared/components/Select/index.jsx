@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
+import { useTranslation } from 'react-i18next';
 import useOnOutsideClick from 'shared/hooks/onOutsideClick';
 import { KeyCodes } from 'shared/constants/keyCodes';
 import Icon from 'shared/components/Icon';
+import i18n from '../../../i18n';
 
 import Dropdown from './Dropdown';
 import {
@@ -41,7 +42,7 @@ const defaultProps = {
   name: undefined,
   value: undefined,
   defaultValue: undefined,
-  placeholder: 'Select',
+  placeholder: i18n.t('basic.select'),
   invalid: false,
   onCreate: undefined,
   isMulti: false,
@@ -67,6 +68,7 @@ const Select = ({
   renderValue: propsRenderValue,
   renderOption: propsRenderOption,
 }) => {
+  const { t } = useTranslation();
   const [stateValue, setStateValue] = useState(defaultValue || (isMulti ? [] : null));
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [searchValue, setSearchValue] = useState('');
@@ -171,7 +173,7 @@ const Select = ({
             )}
             <AddMore>
               <Icon type="plus" />
-              Add more
+              {t('basic.add_more')}
             </AddMore>
           </ValueMulti>
         )}

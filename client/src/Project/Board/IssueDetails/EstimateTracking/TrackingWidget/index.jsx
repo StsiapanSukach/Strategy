@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'lodash';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../../../../i18n';
 
 import { TrackingWidget, WatchIcon, Right, BarCont, Bar, Values } from './Styles';
 
@@ -8,20 +10,28 @@ const propTypes = {
   issue: PropTypes.object.isRequired,
 };
 
-const ProjectBoardIssueDetailsTrackingWidget = ({ issue }) => (
-  <TrackingWidget>
-    <WatchIcon type="stopwatch" size={26} top={-1} />
-    <Right>
-      <BarCont>
-        <Bar width={calculateTrackingBarWidth(issue)} />
-      </BarCont>
-      <Values>
-        <div>{issue.timeSpent ? `${issue.timeSpent}h logged` : 'No time logged'}</div>
-        {renderRemainingOrEstimate(issue)}
-      </Values>
-    </Right>
-  </TrackingWidget>
-);
+const ProjectBoardIssueDetailsTrackingWidget = ({ issue }) => {
+  const { t } = useTranslation();
+
+  return (
+    <TrackingWidget>
+      <WatchIcon type="stopwatch" size={26} top={-1} />
+      <Right>
+        <BarCont>
+          <Bar width={calculateTrackingBarWidth(issue)} />
+        </BarCont>
+        <Values>
+          <div>
+            {issue.timeSpent
+              ? `${issue.timeSpent}${t('description.logged')}`
+              : `${t('description.no_logged')}`}
+          </div>
+          {renderRemainingOrEstimate(issue)}
+        </Values>
+      </Right>
+    </TrackingWidget>
+  );
+};
 
 const calculateTrackingBarWidth = ({ timeSpent, timeRemaining, estimate }) => {
   if (!timeSpent) {
@@ -43,10 +53,10 @@ const renderRemainingOrEstimate = ({ timeRemaining, estimate }) => {
     return null;
   }
   if (!isNil(timeRemaining)) {
-    return <div>{`${timeRemaining}h remaining`}</div>;
+    return <div>{`${timeRemaining}${i18n.t('description.remains')}`}</div>;
   }
   if (!isNil(estimate)) {
-    return <div>{`${estimate}h estimated`}</div>;
+    return <div>{`${estimate}${i18n.t('description.estimated')}`}</div>;
   }
 };
 

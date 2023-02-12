@@ -1,21 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { ErrorPage, ErrorPageInner, ErrorBox, StyledIcon, Title } from './Styles';
 
-const PageError = () => (
-  <ErrorPage>
-    <ErrorPageInner>
-      <ErrorBox>
-        <StyledIcon type="bug" />
-        <Title>There’s been a glitch…</Title>
-        <p>
-          {'We’re not quite sure what went wrong. Please contact us or try looking on our '}
-          <a href="https://support.atlassian.com/jira-software-cloud/">Help Center</a>
-          {' if you need a hand.'}
-        </p>
-      </ErrorBox>
-    </ErrorPageInner>
-  </ErrorPage>
-);
+const PageError = () => {
+  const { t } = useTranslation();
+
+  return (
+    <ErrorPage>
+      <ErrorPageInner>
+        <ErrorBox>
+          <StyledIcon type="bug" />
+          <Title>{t('error')}</Title>
+          <p>
+            {t('error_description')}{' '}
+            <a href="https://support.atlassian.com/jira-software-cloud/">{t('help_center')}</a>
+          </p>
+        </ErrorBox>
+      </ErrorPageInner>
+    </ErrorPage>
+  );
+};
 
 export default PageError;

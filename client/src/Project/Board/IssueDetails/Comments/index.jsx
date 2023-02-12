@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { sortByNewest } from 'shared/utils/javascript';
 
@@ -12,16 +13,20 @@ const propTypes = {
   fetchIssue: PropTypes.func.isRequired,
 };
 
-const ProjectBoardIssueDetailsComments = ({ issue, fetchIssue }) => (
-  <Comments>
-    <Title>Comments</Title>
-    <Create issueId={issue.id} fetchIssue={fetchIssue} />
+const ProjectBoardIssueDetailsComments = ({ issue, fetchIssue }) => {
+  const { t } = useTranslation();
 
-    {sortByNewest(issue.comments, 'createdAt').map(comment => (
-      <Comment key={comment.id} comment={comment} fetchIssue={fetchIssue} />
-    ))}
-  </Comments>
-);
+  return (
+    <Comments>
+      <Title>{t('description.comments')}</Title>
+      <Create issueId={issue.id} fetchIssue={fetchIssue} />
+
+      {sortByNewest(issue.comments, 'createdAt').map(comment => (
+        <Comment key={comment.id} comment={comment} fetchIssue={fetchIssue} />
+      ))}
+    </Comments>
+  );
+};
 
 ProjectBoardIssueDetailsComments.propTypes = propTypes;
 

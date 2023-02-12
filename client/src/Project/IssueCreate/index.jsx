@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import {
   IssueType,
@@ -31,6 +32,7 @@ const propTypes = {
 };
 
 const ProjectIssueCreate = ({ project, fetchProject, onCreate, modalClose }) => {
+  const { t } = useTranslation();
   const [{ isCreating }, createIssue] = useApi.post('/issues');
 
   const { currentUserId } = useCurrentUser();
@@ -61,7 +63,7 @@ const ProjectIssueCreate = ({ project, fetchProject, onCreate, modalClose }) => 
             users: values.userIds.map(id => ({ id })),
           });
           await fetchProject();
-          toast.success('Issue has been successfully created.');
+          toast.success(t('create_issue.success'));
           onCreate();
         } catch (error) {
           Form.handleAPIError(error, form);
@@ -69,11 +71,11 @@ const ProjectIssueCreate = ({ project, fetchProject, onCreate, modalClose }) => 
       }}
     >
       <FormElement>
-        <FormHeading>Create issue</FormHeading>
+        <FormHeading>{t('create_issue.title')}</FormHeading>
         <Form.Field.Select
           name="type"
-          label="Issue Type"
-          tip="Start typing to get a list of possible matches."
+          label={t('create_issue.issue_type')}
+          tip={t('create_issue.type_tip')}
           options={typeOptions}
           renderOption={renderType}
           renderValue={renderType}
@@ -81,17 +83,17 @@ const ProjectIssueCreate = ({ project, fetchProject, onCreate, modalClose }) => 
         <Divider />
         <Form.Field.Input
           name="title"
-          label="Short Summary"
-          tip="Concisely summarize the issue in one or two sentences."
+          label={t('create_issue.issue_title')}
+          tip={t('create_issue.issue_title_descr')}
         />
         <Form.Field.TextEditor
           name="description"
-          label="Description"
-          tip="Describe the issue in as much detail as you'd like."
+          label={t('create_issue.description')}
+          tip={t('create_issue.description_full')}
         />
         <Form.Field.Select
           name="reporterId"
-          label="Reporter"
+          label={t('create_issue.reporter')}
           options={userOptions(project)}
           renderOption={renderUser(project)}
           renderValue={renderUser(project)}
@@ -99,26 +101,26 @@ const ProjectIssueCreate = ({ project, fetchProject, onCreate, modalClose }) => 
         <Form.Field.Select
           isMulti
           name="userIds"
-          label="Assignees"
-          tio="People who are responsible for dealing with this issue."
+          label={t('create_issue.assignees')}
+          tio={t('create_issue.assignees_tip')}
           options={userOptions(project)}
           renderOption={renderUser(project)}
           renderValue={renderUser(project)}
         />
         <Form.Field.Select
           name="priority"
-          label="Priority"
-          tip="Priority in relation to other issues."
+          label={t('create_issue.priority')}
+          tip={t('create_issue.priority_tip')}
           options={priorityOptions}
           renderOption={renderPriority}
           renderValue={renderPriority}
         />
         <Actions>
           <ActionButton type="submit" variant="primary" isWorking={isCreating}>
-            Create Issue
+            {t('create_issue.title')}
           </ActionButton>
           <ActionButton type="button" variant="empty" onClick={modalClose}>
-            Cancel
+            {t('create_issue.cancel')}
           </ActionButton>
         </Actions>
       </FormElement>

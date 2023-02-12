@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { ProjectCategory, ProjectCategoryCopy } from 'shared/constants/projects';
 import toast from 'shared/utils/toast';
@@ -14,6 +15,7 @@ const propTypes = {
 };
 
 const ProjectSettings = ({ project, fetchProject }) => {
+  const { t } = useTranslation();
   const [{ isUpdating }, updateProject] = useApi.put('/project');
 
   return (
@@ -33,7 +35,7 @@ const ProjectSettings = ({ project, fetchProject }) => {
         try {
           await updateProject(values);
           await fetchProject();
-          toast.success('Changes have been saved successfully.');
+          toast.success(t('project.success_changes'));
         } catch (error) {
           Form.handleAPIError(error, form);
         }
@@ -41,20 +43,26 @@ const ProjectSettings = ({ project, fetchProject }) => {
     >
       <FormCont>
         <FormElement>
-          <Breadcrumbs items={['Projects', project.name, 'Project Details']} />
-          <FormHeading>Project Details</FormHeading>
+          <Breadcrumbs
+            items={[t('project.projects'), project.name, t('project.project_details')]}
+          />
+          <FormHeading>{t('project.project_details')}</FormHeading>
 
-          <Form.Field.Input name="name" label="Name" />
-          <Form.Field.Input name="url" label="URL" />
+          <Form.Field.Input name="name" label={t('project.name')} />
+          <Form.Field.Input name="url" label={t('project.url')} />
           <Form.Field.TextEditor
             name="description"
-            label="Description"
-            tip="Describe the project in as much detail as you'd like."
+            label={t('project.description')}
+            tip={t('project.description_tip')}
           />
-          <Form.Field.Select name="category" label="Project Category" options={categoryOptions} />
+          <Form.Field.Select
+            name="category"
+            label={t('project.category')}
+            options={categoryOptions}
+          />
 
           <ActionButton type="submit" variant="primary" isWorking={isUpdating}>
-            Save changes
+            {t('project.save_changes')}
           </ActionButton>
         </FormElement>
       </FormCont>

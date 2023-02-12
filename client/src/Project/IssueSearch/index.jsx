@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { get } from 'lodash';
+import { useTranslation } from 'react-i18next';
 
 import useApi from 'shared/hooks/api';
 import { sortByNewest } from 'shared/utils/javascript';
@@ -30,6 +31,7 @@ const propTypes = {
 
 const ProjectIssueSearch = ({ project }) => {
   const [isSearchTermEmpty, setIsSearchTermEmpty] = useState(true);
+  const { t } = useTranslation();
 
   const [{ data, isLoading }, fetchIssues] = useApi.get('/issues', {}, { lazy: true });
 
@@ -52,7 +54,7 @@ const ProjectIssueSearch = ({ project }) => {
       <SearchInputCont>
         <SearchInputDebounced
           autoFocus
-          placeholder="Search issues by summary, description..."
+          placeholder={t('nav_menu.search')}
           onChange={handleSearchChange}
         />
         <SearchIcon type="search" size={22} />
@@ -61,14 +63,14 @@ const ProjectIssueSearch = ({ project }) => {
 
       {isSearchTermEmpty && recentIssues.length > 0 && (
         <Fragment>
-          <SectionTitle>Recent Issues</SectionTitle>
+          <SectionTitle>{t('nav_menu.recent')}</SectionTitle>
           {recentIssues.map(renderIssue)}
         </Fragment>
       )}
 
       {!isSearchTermEmpty && matchingIssues.length > 0 && (
         <Fragment>
-          <SectionTitle>Matching Issues</SectionTitle>
+          <SectionTitle>{t('nav_menu.matched')}</SectionTitle>
           {matchingIssues.map(renderIssue)}
         </Fragment>
       )}
@@ -76,8 +78,8 @@ const ProjectIssueSearch = ({ project }) => {
       {!isSearchTermEmpty && !isLoading && matchingIssues.length === 0 && (
         <NoResults>
           <NoResultsSVG />
-          <NoResultsTitle>We couldn&apos;t find anything matching your search</NoResultsTitle>
-          <NoResultsTip>Try again with a different term.</NoResultsTip>
+          <NoResultsTitle>{t('nav_menu.not_found')}</NoResultsTitle>
+          <NoResultsTip>{t('nav_menu.not_found_2')}</NoResultsTip>
         </NoResults>
       )}
     </IssueSearch>

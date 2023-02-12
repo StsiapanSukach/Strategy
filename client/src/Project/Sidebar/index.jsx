@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useRouteMatch } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { ProjectCategoryCopy } from 'shared/constants/projects';
 import { Icon, ProjectAvatar } from 'shared/components';
@@ -11,10 +12,8 @@ import {
   ProjectTexts,
   ProjectName,
   ProjectCategory,
-  Divider,
   LinkItem,
   LinkText,
-  NotImplemented,
 } from './Styles';
 
 const propTypes = {
@@ -22,6 +21,7 @@ const propTypes = {
 };
 
 const ProjectSidebar = ({ project }) => {
+  const { t } = useTranslation();
   const match = useRouteMatch();
 
   return (
@@ -30,18 +30,12 @@ const ProjectSidebar = ({ project }) => {
         <ProjectAvatar />
         <ProjectTexts>
           <ProjectName>{project.name}</ProjectName>
-          <ProjectCategory>{ProjectCategoryCopy[project.category]} project</ProjectCategory>
+          <ProjectCategory>{ProjectCategoryCopy[project.category]}</ProjectCategory>
         </ProjectTexts>
       </ProjectInfo>
 
-      {renderLinkItem(match, 'Kanban Board', 'board', '/board')}
-      {renderLinkItem(match, 'Project settings', 'settings', '/settings')}
-      <Divider />
-      {renderLinkItem(match, 'Releases', 'shipping')}
-      {renderLinkItem(match, 'Issues and filters', 'issues')}
-      {renderLinkItem(match, 'Pages', 'page')}
-      {renderLinkItem(match, 'Reports', 'reports')}
-      {renderLinkItem(match, 'Components', 'component')}
+      {renderLinkItem(match, t('sidebar.kanban_board'), 'board', '/board')}
+      {renderLinkItem(match, t('sidebar.project_settings'), 'settings', '/settings')}
     </Sidebar>
   );
 };
@@ -57,7 +51,6 @@ const renderLinkItem = (match, text, iconType, path) => {
     <LinkItem {...linkItemProps}>
       <Icon type={iconType} />
       <LinkText>{text}</LinkText>
-      {!isImplemented && <NotImplemented>Not implemented</NotImplemented>}
     </LinkItem>
   );
 };

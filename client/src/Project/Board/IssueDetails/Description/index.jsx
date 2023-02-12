@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { getTextContentsFromHtmlString } from 'shared/utils/browser';
 import { TextEditor, TextEditedContent, Button } from 'shared/components';
@@ -12,6 +13,7 @@ const propTypes = {
 };
 
 const ProjectBoardIssueDetailsDescription = ({ issue, updateIssue }) => {
+  const { t } = useTranslation();
   const [description, setDescription] = useState(issue.description);
   const [isEditing, setEditing] = useState(false);
 
@@ -24,7 +26,9 @@ const ProjectBoardIssueDetailsDescription = ({ issue, updateIssue }) => {
 
   return (
     <Fragment>
-      <Title>Description</Title>
+      <Title>
+        <b>{t('description.description')}</b>
+      </Title>
       {isEditing ? (
         <Fragment>
           <TextEditor
@@ -34,17 +38,17 @@ const ProjectBoardIssueDetailsDescription = ({ issue, updateIssue }) => {
           />
           <Actions>
             <Button variant="primary" onClick={handleUpdate}>
-              Save
+              {t('description.save')}
             </Button>
             <Button variant="empty" onClick={() => setEditing(false)}>
-              Cancel
+              {t('description.cancel')}
             </Button>
           </Actions>
         </Fragment>
       ) : (
         <Fragment>
           {isDescriptionEmpty ? (
-            <EmptyLabel onClick={() => setEditing(true)}>Add a description...</EmptyLabel>
+            <EmptyLabel onClick={() => setEditing(true)}>{t('description.add')}</EmptyLabel>
           ) : (
             <TextEditedContent content={description} onClick={() => setEditing(true)} />
           )}

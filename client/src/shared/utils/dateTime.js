@@ -1,4 +1,9 @@
 import moment from 'moment';
+import i18n from '../../i18n';
+
+const secondLang = i18n.language === 'ru' ? 'ru' : 'en';
+
+moment.locale(secondLang);
 
 export const formatDate = (date, format = 'MMMM D, YYYY') =>
   date ? moment(date).format(format) : date;

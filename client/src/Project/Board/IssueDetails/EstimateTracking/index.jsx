@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { isNil } from 'lodash';
-
+import { useTranslation } from 'react-i18next';
 import { InputDebounced, Modal, Button } from 'shared/components';
+import i18n from '../../../../i18n';
 
 import TrackingWidget from './TrackingWidget';
 import { SectionTitle } from '../Styles';
@@ -21,56 +22,62 @@ const propTypes = {
   updateIssue: PropTypes.func.isRequired,
 };
 
-const ProjectBoardIssueDetailsEstimateTracking = ({ issue, updateIssue }) => (
-  <Fragment>
-    <SectionTitle>Original Estimate (hours)</SectionTitle>
-    {renderHourInput('estimate', issue, updateIssue)}
+const ProjectBoardIssueDetailsEstimateTracking = ({ issue, updateIssue }) => {
+  const { t } = useTranslation();
 
-    <SectionTitle>Time Tracking</SectionTitle>
-    <Modal
-      testid="modal:tracking"
-      width={400}
-      renderLink={modal => (
-        <TrackingLink onClick={modal.open}>
-          <TrackingWidget issue={issue} />
-        </TrackingLink>
-      )}
-      renderContent={modal => (
-        <ModalContents>
-          <ModalTitle>Time tracking</ModalTitle>
-          <TrackingWidget issue={issue} />
-          <Inputs>
-            <InputCont>
-              <InputLabel>Time spent (hours)</InputLabel>
-              {renderHourInput('timeSpent', issue, updateIssue)}
-            </InputCont>
-            <InputCont>
-              <InputLabel>Time remaining (hours)</InputLabel>
-              {renderHourInput('timeRemaining', issue, updateIssue)}
-            </InputCont>
-          </Inputs>
-          <Actions>
-            <Button variant="primary" onClick={modal.close}>
-              Done
-            </Button>
-          </Actions>
-        </ModalContents>
-      )}
+  return (
+    <Fragment>
+      <SectionTitle>{t('description.planned_tracking')}</SectionTitle>
+      {renderHourInput('estimate', issue, updateIssue)}
+
+      <SectionTitle>{t('description.tracking')}</SectionTitle>
+      <Modal
+        testid="modal:tracking"
+        width={400}
+        renderLink={modal => (
+          <TrackingLink onClick={modal.open}>
+            <TrackingWidget issue={issue} />
+          </TrackingLink>
+        )}
+        renderContent={modal => (
+          <ModalContents>
+            <ModalTitle>{t('description.tracking')}</ModalTitle>
+            <TrackingWidget issue={issue} />
+            <Inputs>
+              <InputCont>
+                <InputLabel>{t('description.spent_tracking')}</InputLabel>
+                {renderHourInput('timeSpent', issue, updateIssue)}
+              </InputCont>
+              <InputCont>
+                <InputLabel>{t('description.remain_tracking')}</InputLabel>
+                {renderHourInput('timeRemaining', issue, updateIssue)}
+              </InputCont>
+            </Inputs>
+            <Actions>
+              <Button variant="primary" onClick={modal.close}>
+                {t('description.done')}
+              </Button>
+            </Actions>
+          </ModalContents>
+        )}
+      />
+    </Fragment>
+  );
+};
+
+const renderHourInput = (fieldName, issue, updateIssue) => {
+  return (
+    <InputDebounced
+      placeholder={i18n.t('description.number')}
+      filter={/^\d{0,6}$/}
+      value={isNil(issue[fieldName]) ? '' : issue[fieldName]}
+      onChange={stringValue => {
+        const value = stringValue.trim() ? Number(stringValue) : null;
+        updateIssue({ [fieldName]: value });
+      }}
     />
-  </Fragment>
-);
-
-const renderHourInput = (fieldName, issue, updateIssue) => (
-  <InputDebounced
-    placeholder="Number"
-    filter={/^\d{0,6}$/}
-    value={isNil(issue[fieldName]) ? '' : issue[fieldName]}
-    onChange={stringValue => {
-      const value = stringValue.trim() ? Number(stringValue) : null;
-      updateIssue({ [fieldName]: value });
-    }}
-  />
-);
+  );
+};
 
 ProjectBoardIssueDetailsEstimateTracking.propTypes = propTypes;
 

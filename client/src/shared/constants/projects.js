@@ -1,3 +1,5 @@
+import i18n from '../../i18n';
+
 export const ProjectCategory = {
   SOFTWARE: 'software',
   MARKETING: 'marketing',
@@ -5,7 +7,7 @@ export const ProjectCategory = {
 };
 
 export const ProjectCategoryCopy = {
-  [ProjectCategory.SOFTWARE]: 'Software',
-  [ProjectCategory.MARKETING]: 'Marketing',
-  [ProjectCategory.BUSINESS]: 'Business',
+  [ProjectCategory.SOFTWARE]: i18n.t('sidebar.Software'),
+  [ProjectCategory.MARKETING]: i18n.t('sidebar.Marketing'),
+  [ProjectCategory.BUSINESS]: i18n.t('sidebar.Business'),
 };

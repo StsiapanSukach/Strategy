@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Route, useRouteMatch, useHistory } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import useMergeState from 'shared/hooks/mergeState';
 import { Breadcrumbs, Modal } from 'shared/components';
@@ -24,6 +25,7 @@ const defaultFilters = {
 };
 
 const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
+  const { t } = useTranslation();
   const match = useRouteMatch();
   const history = useHistory();
 
@@ -31,7 +33,7 @@ const ProjectBoard = ({ project, fetchProject, updateLocalProjectIssues }) => {
 
   return (
     <Fragment>
-      <Breadcrumbs items={['Projects', project.name, 'Kanban Board']} />
+      <Breadcrumbs items={[t('project.projects'), project.name, t('sidebar.kanban_board')]} />
       <Header />
       <Filters
         projectUsers={project.users}

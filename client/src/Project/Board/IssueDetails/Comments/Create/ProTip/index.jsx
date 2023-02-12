@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { KeyCodes } from 'shared/constants/keyCodes';
 import { isFocusedElementEditable } from 'shared/utils/browser';
@@ -11,6 +12,8 @@ const propTypes = {
 };
 
 const ProjectBoardIssueDetailsCommentsCreateProTip = ({ setFormOpen }) => {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const handleKeyDown = event => {
       if (!isFocusedElementEditable() && event.keyCode === KeyCodes.M) {
@@ -28,7 +31,7 @@ const ProjectBoardIssueDetailsCommentsCreateProTip = ({ setFormOpen }) => {
 
   return (
     <Tip>
-      <strong>Pro tip:</strong>press<TipLetter>M</TipLetter>to comment
+      {t('description.tip_comment')} <TipLetter>M</TipLetter>
     </Tip>
   );
 };
