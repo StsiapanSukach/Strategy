@@ -5,29 +5,29 @@ import NormalizeStyles from './NormalizeStyles';
 import BaseStyles from './BaseStyles';
 import Toast from './Toast';
 import Routes from './Routes';
-import accessDenied from './assets/access_denied.png';
+// import accessDenied from './assets/access_denied.png';
 
 import './fontStyles.css';
 
 const App = () => {
-  const account = prompt('Имя : ', '');
-  const password = prompt('Пароль : ', '');
+  // const account = prompt('Имя : ', '');
+  // const password = prompt('Пароль : ', '');
 
-  if (account !== 'user' || password !== '1234') {
-    return (
-      <div
-        style={{
-          background: '#f9f6f6',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <img src={accessDenied} alt="Access Denied" />
-      </div>
-    );
-  }
+  // if (account !== 'user' || password !== '1234') {
+  //   return (
+  //     <div
+  //       style={{
+  //         background: '#f9f6f6',
+  //         display: 'flex',
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         height: '100vh',
+  //       }}
+  //     >
+  //       <img src={accessDenied} alt="Access Denied" />
+  //     </div>
+  //   );
+  // }
 
   return (
     <Suspense fallback="loading">
